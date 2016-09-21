@@ -1,0 +1,14 @@
+(define ID (lambda (x) x))
+(define T (lambda (t f) t))
+(define F (lambda (t f) f))
+
+(define IF (lambda (c a b) (c a b)))
+(define NOT (lambda (a) (IF a F T)))
+(define AND (lambda (a b) (IF a
+                              (IF b T F)
+                              F)))
+(define OR (lambda (a b) (IF a
+                             T
+                             (IF b T F))))
+(define XOR (lambda (a b) (OR (AND a (NOT b))
+                              (AND b (NOT a)))))
