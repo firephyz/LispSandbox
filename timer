@@ -1,0 +1,25 @@
+; Implements a timer for any generic function
+; (In this case, the function called work).
+
+(define (time func)
+
+  ; Executes the given function func and returns the end system time
+  (define (execute&time shouldSetEndTime? func)
+    (if shouldSetEndTime?
+        (runtime)
+        (execute&time (not shouldSetEndTime?)
+                      (func))))
+
+  ; Find the start and end system times after executing the function
+  (let ((start-time (runtime))
+        (end-time (execute&time #f work)))
+
+    ; Return the elapsed time
+    (- end-time start-time)))
+
+; This is the job to be timed
+(define (work)
+  (define (worker count max)
+    (cond ((< count max) (worker (+ count 1) max))))
+
+  (worker 0 100000))
